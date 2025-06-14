@@ -3,9 +3,13 @@ import 'package:cms_inv_mobile/models/entities/user_profile_model.dart';
 import 'package:cms_inv_mobile/models/requests/edit_profile_request.dart';
 import 'package:cms_inv_mobile/services/profile_service.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:mime/mime.dart';
+import 'dart:convert';
 
 class EditProfileViewModel extends GetxController {
   final _service = Get.find<ProfileService>();
+  final ImagePicker _picker = ImagePicker();
 
   var loading = true.obs;
   var profile = Rxn<UserProfileModel>();
@@ -21,6 +25,31 @@ class EditProfileViewModel extends GetxController {
   void onInit() {
     super.onInit();
     _loadProfile();
+  }
+
+  /// เปิด gallery ให้เลือกภาพ แปลงเป็น base64 Data URI พร้อมตรวจขนาดและคุณภาพ
+  Future<void> pickImage() async {
+    try {
+      final XFile? file = await _picker.pickImage(
+        source: ImageSource.gallery,
+        maxWidth: 800,
+        maxHeight: 800,
+        imageQuality: 85,
+      );
+      if (file == null) return;
+
+      final bytes = await file.readAsBytes();
+      const maxBytes = 5 * 1024 * 1024; // 5MB
+      if (bytes.length > maxBytes) {
+        Get.snackbar('ไฟล์ใหญ่เกินไป', 'ขนาดรูปต้องไม่เกิน 5MB');
+        return;
+      }
+
+      final mimeType = lookupMimeType(file.path) ?? 'image/jpeg';
+      avatarUrl.value = 'data:$mimeType;base64,${base64Encode(bytes)}';
+    } catch (e) {
+      Get.snackbar('เกิดข้อผิดพลาด', 'ไม่สามารถเลือกภาพได้');
+    }
   }
 
   Future<void> _loadProfile() async {

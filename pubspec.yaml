@@ -40,6 +40,11 @@ dependencies:
   http: ^0.13.5
   get_storage: ^2.1.1
   intl: ^0.18.1
+  image_picker: 0.8.5+3
+  mime: ^1.0.4
+
+dependency_overrides:
+  image_picker_android: 0.8.5+3
 
 dev_dependencies:
   flutter_test:

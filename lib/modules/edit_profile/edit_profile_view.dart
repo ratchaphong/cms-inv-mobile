@@ -26,7 +26,7 @@ class EditProfileView extends StatelessWidget {
           child: Column(
             children: [
               GestureDetector(
-                onTap: () {},
+                onTap: vm.pickImage, // เรียก pickImage ใน ViewModel
                 child: AvatarImage(
                   source: vm.avatarUrl.value,
                   radius: 48.0,
