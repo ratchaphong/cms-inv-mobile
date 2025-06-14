@@ -1,9 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.cms_inv_mobile">
    <application
-        android:label="cms_inv_mobile"
+        android:label="BStore"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/bstore">
         <activity
             android:name=".MainActivity"
             android:exported="true"

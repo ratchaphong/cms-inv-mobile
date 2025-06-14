@@ -1,5 +1,6 @@
 import 'package:cms_inv_mobile/models/entities/user_profile_model.dart';
 import 'package:cms_inv_mobile/shared/widgets/app_drawer.dart';
+import 'package:cms_inv_mobile/shared/widgets/avatar_image.dart';
 import 'package:cms_inv_mobile/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -33,11 +34,10 @@ class ProfileView extends StatelessWidget {
               Text('👋 สวัสดีคุณ ${p.name}',
                   style: theme.textTheme.headlineSmall),
               const SizedBox(height: 16),
-              CircleAvatar(
-                radius: 48,
-                backgroundImage: p.avatarUrl != null
-                    ? NetworkImage(p.avatarUrl!)
-                    : const AssetImage('assets/bstore.png') as ImageProvider,
+              AvatarImage(
+                source: p.avatarUrl,
+                radius: 48.0,
+                fallbackAsset: 'assets/images/bstore.png',
               ),
               const SizedBox(height: 24),
               _buildInfoRow('ชื่อ - สกุล', p.name),

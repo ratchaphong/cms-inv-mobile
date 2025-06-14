@@ -1,4 +1,5 @@
 import 'package:cms_inv_mobile/shared/widgets/app_drawer.dart';
+import 'package:cms_inv_mobile/shared/widgets/avatar_image.dart';
 import 'package:cms_inv_mobile/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -25,14 +26,11 @@ class EditProfileView extends StatelessWidget {
           child: Column(
             children: [
               GestureDetector(
-                onTap: () {
-                  // คุณอาจเพิ่ม logic ให้เลือกภาพได้ตรงนี้
-                },
-                child: CircleAvatar(
-                  radius: 48,
-                  backgroundImage: vm.avatarUrl.value.isNotEmpty
-                      ? NetworkImage(vm.avatarUrl.value)
-                      : const AssetImage('assets/bstore.png') as ImageProvider,
+                onTap: () {},
+                child: AvatarImage(
+                  source: vm.avatarUrl.value,
+                  radius: 48.0,
+                  fallbackAsset: 'assets/images/bstore.png',
                 ),
               ),
               const SizedBox(height: 12),
